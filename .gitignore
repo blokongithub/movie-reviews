@@ -1,1 +1,3 @@
 imdb_model.keras
+database.db
+__pycache__

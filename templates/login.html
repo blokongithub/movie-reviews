@@ -1,0 +1,86 @@
+<!-- Copied code from one of my other repos https://github.com/blokongithub/zeddit/blob/main/templates/login.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+            position: relative;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+        section {
+            padding: 20px;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        form input[type="submit"] {
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        form input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hello, please enter your login details below</h1>
+        </header>
+        <section>
+            <form action="/login" method="POST">
+                <p>Name: <input type="text" name="name" pattern="[a-zA-Z0-9_]+" title="You are only allowed letters, numbers, and underscores" /></p>
+                <p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9_]{8,}" title="You are only allowed letters, numbers, and underscores, min length is 8 characters" /></p>
+                <p>Login: <input type="submit" name="loginsubmit" value="Login" /></p>
+                <p>New user? Sign up with the same credentials now! <input type="submit" name="new" value="Sign Up" /></p>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
