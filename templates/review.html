@@ -1,0 +1,81 @@
+<!--some old css from a previous project called zeddit that i made for hackclub-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+            position: relative;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+        section {
+            padding: 20px;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form input[type="text"],
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        form input[type="submit"] {
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        form input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hello, please enter the review below</h1>
+        </header>
+        <section>
+            <form action="/reviewresult" method="POST">
+                <p>Content: <textarea name="content"></textarea></p>
+                <p><input type="submit" name="submit" /></p>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
