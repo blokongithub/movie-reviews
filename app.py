@@ -2,6 +2,7 @@ import flask
 from flask import Flask, request, jsonify, render_template, redirect, make_response, send_file
 import backend
 from neuralnetworkforsite import neuralnet
+import base64
 
 app = flask.Flask(__name__)
 HOST = 5000
@@ -15,22 +16,44 @@ def home():
     if 'username' not in request.cookies:
         return redirect('/login')
     
-    resp = make_response(render_template('home.html'))
+    resp = make_response(render_template('home.html', movies=backend.getmovies()))
     return resp
 
-@app.route('/makereview')
-def makereview():
+@app.route('/movies/<int:movie_id>')
+def movie(movie_id):
     if 'username' not in request.cookies:
         return redirect('/login')
-    resp = make_response(render_template('review.html'))
-    return resp
+    
+    movie = backend.getmovie(movie_id)
+    reviews = backend.getreviews(movie_id)
+    return render_template('movie.html', movie=movie, reviews=reviews)
+
+@app.route('/movies/<int:movie_id>/makereview', methods=['GET', 'POST'])
+def makereviewform(movie_id):
+    if 'username' not in request.cookies:
+        return redirect('/login')
+    if request.method == 'GET':
+        return render_template('review.html', movie_id=movie_id)
+    if request.method == 'POST':
+        data = request.form["content"]
+        score = net.predict_sentiment(data)
+        prediction = round(score*100, 3)
+        backend.addreview(movie_id, backend.getuserid(request.cookies['username']), data, prediction)
+        return redirect(f'/movies/{movie_id}')
+
+@app.route('/makereview')
+def makereview(methods=['GET', 'POST']):
+    if 'username' not in request.cookies:
+        return redirect('/login')
+    if request.method == 'GET':
+        resp = make_response(render_template('review.html'))
+        return resp
 
 @app.route('/reviewresult', methods=['POST'])
 def review():
     if 'username' not in request.cookies:
         return redirect('/login')
     data = request.form["content"]
-    print(data)
     prediction = net.predict_sentiment(data)
     return render_template('postreview.html', review=round(prediction*100, 3))
 
@@ -74,7 +97,13 @@ def addmovie():
         return render_template('addmovie.html')
     
     if request.method == 'POST':
-        pass #TODO
+        content = request.form['text']
+        photo = request.files['image']
+        
+        photo_b64 = base64.b64encode(photo.read()).decode('utf-8')
+        backend.addmovie(content, photo_b64)
+        resp = make_response(redirect('/home'))
+        return redirect('/home')
 
 @app.errorhandler(404)
 def page_not_found(e):

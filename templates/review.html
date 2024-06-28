@@ -63,15 +63,33 @@
         form input[type="submit"]:hover {
             background-color: #555;
         }
+        .home-button:hover {
+            background-color: #555;
+        }
+        .home-button {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <a href="../../home" class="home-button">Home</a>
             <h1>Hello, please enter the review below</h1>
         </header>
         <section>
-            <form action="/reviewresult" method="POST">
+            <form action="" method="POST">
                 <p>Content: <textarea name="content"></textarea></p>
                 <p><input type="submit" name="submit" /></p>
             </form>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{movie[1]}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+        section {
+            padding: 20px;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .movie-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .movie-detail img {
+            max-width: 300px;
+            max-height: 450px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .movie-info {
+            max-width: 600px;
+            text-align: center;
+        }
+        .movie-info h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .movie-info p {
+            color: #777;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .review-section {
+            margin-top: 30px;
+        }
+        .review {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .review p {
+            color: #444;
+            margin: 5px 0;
+        }
+        .review .score {
+            color: #777;
+            font-size: 14px;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #77aaff;
+            text-decoration: none;
+        }
+        .home-button:hover {
+            background-color: #555;
+        }
+        .home-button {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .make-review:hover {
+            background-color: #555;
+        }
+        .make-review {
+            position: absolute;
+            top: 30px;
+            left: 120px;
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../home" class="home-button">Home</a>
+        <a href="{{ request.path }}/makereview" class="make-review">Make Review</a>
+        <h1>{{movie[1]}}</h1>
+    </header>
+    <section class="container">
+        <div class="movie-detail">
+            <img src="data:image/jpeg;base64,{{ movie[2] }}" alt="{{ movie[1] }}">
+            <div class="movie-info">
+                <h2>{{ movie[1] }}</h2>
+                <p><strong>Movie ID:</strong> {{ movie[0] }}</p>
+                <p>{{ movie[3] }}</p>
+            </div>
+        </div>
+        <section class="review-section">
+            <h2>Reviews</h2>
+            {% for review in reviews %}
+            <div class="review">
+                <p><strong>Review by User:</strong> {{ review[5] }}</p>
+                <p>{{ review[3] }}</p>
+                <p class="score"><strong>Ai generated score:</strong> {{ review[4] }} / 100</p>
+            </div>
+            {% endfor %}
+        </section>
+    </section>
+</body>
+</html>
