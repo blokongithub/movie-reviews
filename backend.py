@@ -136,3 +136,30 @@ def addreview(movie_id, user_id, review, score):
             dbcon.commit()
     except Exception as e:
         print("Error found:", e)
+        
+def getuser(user_id):
+    try:
+        with get_db_connection() as dbcon:
+            cursor = dbcon.cursor()
+            cursor.execute("""
+                SELECT * FROM users WHERE id = ?
+            """, (user_id,))
+            return cursor.fetchone()
+    except Exception as e:
+        print("Error found:", e)
+        return None
+    
+def getuserreviews(user_id):
+    try:
+        with get_db_connection() as dbcon:
+            cursor = dbcon.cursor()
+            cursor.execute("""
+                SELECT reviews.*, movies.title
+                FROM reviews
+                INNER JOIN movies ON reviews.movie_id = movies.id
+                WHERE reviews.user_id = ?
+            """, (user_id,))
+            return cursor.fetchall()[::-1]
+    except Exception as e:
+        print("Error found:", e)
+        return []

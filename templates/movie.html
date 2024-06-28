@@ -143,7 +143,7 @@
             <h2>Reviews</h2>
             {% for review in reviews %}
             <div class="review">
-                <p><strong>Review by User:</strong> {{ review[5] }}</p>
+                <p><strong>Review by User:</strong> <a href="../users/{{review[1]}}">{{ review[5] }}</p>
                 <p>{{ review[3] }}</p>
                 <p class="score"><strong>Ai generated score:</strong> {{ review[4] }} / 100</p>
             </div>

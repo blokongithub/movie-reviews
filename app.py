@@ -11,6 +11,12 @@ HOST = 5000
 def index():
     return redirect('/home')
 
+@app.route('/logout')
+def logout():
+    resp = make_response(redirect('/login'))
+    resp.set_cookie('username', '', expires=0)
+    return resp
+
 @app.route('/home')
 def home():
     if 'username' not in request.cookies:
@@ -41,6 +47,11 @@ def makereviewform(movie_id):
         backend.addreview(movie_id, backend.getuserid(request.cookies['username']), data, prediction)
         return redirect(f'/movies/{movie_id}')
 
+@app.route("/users/<int:user_id>")
+def userprofile(user_id):
+    if 'username' not in request.cookies:
+        return redirect('/login')
+    return render_template('profile.html', user=backend.getuser(user_id), reviews = backend.getuserreviews(user_id))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

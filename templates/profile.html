@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .profile p,
+        .reviews p {
+            color: #777;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .reviews ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .reviews li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .reviews li h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .reviews li p {
+            margin: 5px 0;
+        }
+        .home-button:hover {
+            background-color: #555;
+        }
+        .home-button {
+            position: absolute;
+            top: 30px;
+            left: 220px;
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../../home" class="home-button">Home</a>
+            <h1>{{ user[1] }}'s Profile</h1>
+        </header>
+        <main>
+            <section class="profile">
+                <h2>User Information</h2>
+                <p><strong>Username:</strong> {{ user[1] }}</p>
+            </section>
+            <section class="reviews">
+                <h2>User Reviews</h2>
+                {% if reviews %}
+                    <ul>
+                        {% for review in reviews %}
+                            <li>
+                                <h3>Review for Movie ID: {{ review[2] }}</h3>
+                                <p><strong>Review:</strong> {{ review[3] }}</p>
+                                <p><strong>Score:</strong> {{ review[4] }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No reviews available.</p>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+</body>
+</html>
