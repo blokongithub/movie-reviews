@@ -41,22 +41,6 @@ def makereviewform(movie_id):
         backend.addreview(movie_id, backend.getuserid(request.cookies['username']), data, prediction)
         return redirect(f'/movies/{movie_id}')
 
-@app.route('/makereview')
-def makereview(methods=['GET', 'POST']):
-    if 'username' not in request.cookies:
-        return redirect('/login')
-    if request.method == 'GET':
-        resp = make_response(render_template('review.html'))
-        return resp
-
-@app.route('/reviewresult', methods=['POST'])
-def review():
-    if 'username' not in request.cookies:
-        return redirect('/login')
-    data = request.form["content"]
-    prediction = net.predict_sentiment(data)
-    return render_template('postreview.html', review=round(prediction*100, 3))
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
